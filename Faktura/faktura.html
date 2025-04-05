@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <title>Faktura</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            width: 21cm;
+            height: 29.7cm;
+            margin: 0 auto;
+            padding: 1cm;
+            box-sizing: border-box;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            padding: 4px;
+            vertical-align: top;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .lightgray {
+            background-color: #eee;
+        }
+
+        .yellow-box {
+            background-color: #ffff99;
+            padding: 1em;
+            margin-top: 2em;
+        }
+
+        .konto-felt {
+            border: 1px solid black;
+            padding: 0.3em 1em;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Topptekst -->
+    <div class="header">
+        <div>
+            <p>{{Firmanavn}}</p>
+        </div>
+        <div style="text-align: right;">
+            <p>Org.No. <strong>{{OrgNr}}</strong></p>
+        </div>
+    </div>
+
+    <!-- Faktura og info side om side -->
+    <div class="header" style="margin-top: 2em; align-items: flex-end;">
+        <div>
+            <strong>{{Kundenavn}}</strong><br>
+            {{Kundeaddresse}}<br>
+            {{Kundepostnummer}} {{Kundepoststed}}
+        </div>
+
+        <div style="text-align: right;">
+            <h2 style="margin: 0;">Faktura</h2>
+            <div style="
+		display: grid;
+		grid-template-columns: 90px 60px;
+		row-gap: 0.2em;
+		line-height: 1.0;
+		white-space: nowrap;
+		margin-top: 0.2em;
+	  ">
+                <div style="text-align: left;">Kundenr</div>      <div style="text-align: right;">{{Kundenr}}</div>
+                <div style="text-align: left;">Fakturanr</div>    <div style="text-align: right;">{{Fakturanr}}</div>
+                <div style="text-align: left;">Fakturadato</div>  <div style="text-align: right;">{{Fakturadato}}</div>
+                <div style="text-align: left;">Forfallsdato</div> <div style="text-align: right;">{{Fakturaforfall}}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fakturalinjer -->
+    <table border="1" style="margin-top: 2em;">
+        <tr class="lightgray">
+            <th>Varenr.</th>
+            <th>Beskrivelse.</th>
+            <th>Antall</th>
+            <th>Pris</th>
+            <th>Rabatt</th>
+            <th>MVA</th>
+            <th>Netto</th>
+        </tr>
+        <tr>
+            <td>{{ItemKode}}</td>
+            <td>{{ItemNavn}}</td>
+            <td>{{Antall}}</td>
+            <td>{{ItemKroner}}.{{ItemOre}}</td>
+            <td>{{RabattSats}}</td>
+            <td>{{ItemMvaSats}}</td>
+            <td>{{ItemsTotalPris}}.{{ItemOre}}</td>
+        </tr>
+    </table>
+
+    <br>
+
+    <!-- Totaler -->
+    <table style="width: 40%; float: right;">
+        <tr><td style="text-align: right">Nettosalg:</td><td style="text-align: right">{{Kroner}}.{{Ore}}</td></tr>
+        <tr><td style="text-align: right">MVA:</td><td style="text-align: right">{{MvaKroner}}.{{MvaOre}}</td></tr>
+        <tr><td style="text-align: right"><strong>Total:</strong></td><td style="text-align: right"><strong>{{TotaltKroner}}.{{TotaltOre}}</strong></td></tr>
+    </table>
+
+    <div style="clear: both;"></div>
+
+    <!-- GIRO-delen -->
+    <table border="0" style="margin-top: 1em; width: 100%; text-align: center;">
+        <tr class="lightgray">
+            <th style="text-align: left">Kundeidentifikasjon (KID)</th>
+            <th>Kroner</th>
+            <th>Øre</th>
+            <th>Til konto</th>
+        </tr>
+        <tr>
+            <td style="text-align: left">{{Kid}}</td>
+            <td>{{Kroner}}</td>
+            <td>{{Ore}}</td>
+            <td>{{Kontonr}}</td>
+        </tr>
+    </table>
+
+
+</body>
+</html>
