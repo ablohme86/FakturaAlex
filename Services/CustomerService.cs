@@ -46,6 +46,10 @@ namespace FakturaAlex.Services
         {
             return _context.Customers.FirstOrDefault(c => c.CustomerId == id);
         }
+        public List<Customer> GetAllCustomers()
+        {
+            return _context.Customers.ToList();
+        }
 
         public void CreateCustomer(Customer customer)
         {

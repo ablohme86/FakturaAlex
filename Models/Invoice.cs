@@ -33,8 +33,6 @@ namespace FakturaAlex.Models
     public class Invoice
     {
         public int InvoiceId { get; set; }
-        public string CompanyName { get; set; }
-        public string OrgNumber { get; set; }
         public int InvoiceNumber { get; set; }
         public DateTime InvoiceDate { get; set; }
         public DateTime DueDate { get; set; }
@@ -42,7 +40,6 @@ namespace FakturaAlex.Models
         public List<Item> Items { get; set; }
         public string Kid { get; set; }
         public string AccountNumber { get; set; }
-
         public decimal NetTotal => Items.Sum(i => i.Quantity * i.Price);
         public decimal MvaTotal => 0; // enkel versjon
         public decimal Total => NetTotal + MvaTotal;

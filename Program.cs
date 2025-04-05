@@ -1,8 +1,8 @@
-/*
+﻿/*
  * FakturaAlex v1.0
  * 
  * File: Program.cs
- * Author: Alexander Blohm� <alexander@thrino.no>
+ * Author: Alexander Blohmé <alexander@thrino.no>
  * Date: April 5, 2025
  * Description: Main
  * 
@@ -22,6 +22,8 @@
  * 
  */
 
+using FakturaAlex.Database;
+
 namespace FakturaAlex
 {
     internal static class Program
@@ -32,6 +34,9 @@ namespace FakturaAlex
         [STAThread]
         static void Main()
         {
+            using var db = new ApplicationDbContext();
+            db.Database.EnsureCreated(); // 👈 må kjøres før du spør etter data
+
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
